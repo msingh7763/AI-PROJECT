@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Shopping Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-shopping-bag text-2xl text-blue-600 mr-2"></i>
+                <h1 class="text-2xl font-bold text-gray-800">AI Shopping Assistant</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="wishlistBtn" class="text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <button id="cartBtn" class="text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="bg-red-500 text-white rounded-full px-2 py-1 text-xs">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Search Section -->
+        <section class="mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" id="searchInput" placeholder="Search for products..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex gap-2">
+                    <select id="categorySelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="jewelery">Jewelery</option>
+                        <option value="men's clothing">Men's Clothing</option>
+                        <option value="women's clothing">Women's Clothing</option>
+                    </select>
+                    <button id="searchBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Chat Assistant -->
+        <section class="mb-8">
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="border-b p-4 flex items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">AI Shopping Assistant</h3>
+                            <p class="text-sm text-gray-500">Ask me about products, prices, or recommendations</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="chatMessages" class="h-96 overflow-y-auto p-4 space-y-4"></div>
+                <div class="border-t p-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="chatInput" placeholder="Ask about products, prices, or recommendations..." 
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="sendMessageBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section>
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="wishlistModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-2xl mx-auto mt-20">
+            <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
+            <div id="wishlistItems" class="space-y-4"></div>
+            <button class="mt-4 bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300" onclick="closeWishlistModal()">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-2xl mx-auto mt-20">
+            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
+            <div id="cartItems" class="space-y-4"></div>
+            <div class="mt-4 flex justify-between items-center">
+                <span class="font-bold">Total: $<span id="cartTotal">0</span></span>
+                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Checkout
+                </button>
+            </div>
+            <button class="mt-4 bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300" onclick="closeCartModal()">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
